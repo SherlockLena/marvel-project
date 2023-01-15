@@ -1,6 +1,7 @@
 import './charList.scss';
-import MarvelService from '../../services/MarvelService';
 import { Component } from 'react';
+import PropTypes from 'prop-types';
+import MarvelService from '../../services/MarvelService';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
@@ -54,15 +55,33 @@ class CharList extends Component {
         })
     }
 
+    itemRefs = [];
+
+    setRef = (ref) => {
+        this.itemRefs.push(ref);
+    }
+
+    itemIsSelected = (i) => {
+        this.itemRefs.forEach(item => item.classList.remove('char__item_selected'));
+        this.itemRefs[i].classList.add('char__item_selected');
+        this.itemRefs[i].focus();
+    }
+
     renderItems(arr) {
-        const items =  arr.map((item) => {
+        const items =  arr.map((item, i) => {
             let imgStyle = {'objectFit' : 'cover'};
             if (item.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
                 imgStyle = {'objectFit' : 'unset'};
             }
             
             return (
-                <li className="char__item" key={item.id} onClick={() => this.props.onCharSelected(item.id)}>
+                <li className="char__item"
+                    key={item.id} 
+                    onClick={() => {
+                        this.props.onCharSelected(item.id);
+                        this.itemIsSelected(i);
+                    }}
+                    ref={this.setRef}>
                     <img src={item.thumbnail} alt={item.name} style={imgStyle}/>
                     <div className="char__name">{item.name}</div>
                 </li>
@@ -100,6 +119,10 @@ class CharList extends Component {
             </div>
         )
     }
+}
+
+CharList.propTypes = {
+    onCharSelected: PropTypes.func.isRequired
 }
 
 export default CharList;
