@@ -10,7 +10,6 @@ const CharList = (props) => {
     const [newItemLoading, setNewItemLoading] = useState(false);
     const [offset, setOffset] = useState(210);
     const [isEnded, setIsEnded] = useState(false);
-
     const {loading, error, getAllCharacters} = useMarvelService();
 
     useEffect(() => {
