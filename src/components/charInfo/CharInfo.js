@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect} from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
@@ -74,12 +75,15 @@ const View = ({ char }) => {
                     ? null
                     : "There's no comics with this character"}
                 {comics.map((item, i) => {
+                    const comicId = item.resourceURI.replace(/\D/g, '').slice(1);
                     // eslint-disable-next-line
                     if (i >= 10) return;
                     return (
-                        <li key={i} className="char__comics-item">
-                            {item.name}
-                        </li>
+                        <Link to={`/comics/${comicId}`}>
+                            <li key={i} className="char__comics-item">
+                                {item.name}
+                            </li>
+                        </Link>
                     );
                 })}
             </ul>
