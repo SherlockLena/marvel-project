@@ -15,7 +15,7 @@ const Page404 = () => {
             <ErrorMessage/>
             <p style={{'textAlign': 'center', 'fontWeight': 'bold', 'fontSize': '24px'}}>Sorry, page doesn't exist</p>
             <Link style={{'display':'block', 'textAlign': 'center', 'fontWeight': 'bold', 'fontSize':'24px',
-            'marginTop': '30px', 'color': '#9F0013'}} to='/'>Back to the main page</Link>
+            'marginTop': '30px', 'color': '#9F0013'}} to="/marvel-project/">Back to the main page</Link>
         </div>
     )
 }
